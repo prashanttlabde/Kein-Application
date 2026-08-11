@@ -1,0 +1,52 @@
+{
+  "name": "Kein - Live Social Commerce",
+  "short_name": "Kein",
+  "description": "Watch live streams, shop products, and earn with your favorite influencers on Kein - India's leading social commerce platform.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#003366",
+  "theme_color": "#003366",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "/icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["shopping", "social", "entertainment", "lifestyle"],
+  "lang": "en-IN",
+  "dir": "ltr",
+  "prefer_related_applications": false,
+  "shortcuts": [
+    {
+      "name": "Explore",
+      "short_name": "Explore",
+      "description": "Explore trending products and creators",
+      "url": "/explore",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Live",
+      "short_name": "Live",
+      "description": "Watch live shopping streams",
+      "url": "/live",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "Reels",
+      "short_name": "Reels",
+      "description": "Watch shopping reels",
+      "url": "/reels",
+      "icons": [{ "src": "/icon-192x192.png", "sizes": "192x192" }]
+    }
+  ]
+}

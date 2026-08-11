@@ -1,0 +1,46 @@
+# Kein.in Robots.txt
+User-agent: *
+Allow: /
+
+# Disallow private/protected routes
+Disallow: /dashboard
+Disallow: /creator-dashboard
+Disallow: /seller-dashboard
+Disallow: /admin-portal
+Disallow: /admin
+Disallow: /api/
+Disallow: /auth/callback
+Disallow: /settings
+Disallow: /profile/*/settings
+Disallow: /account
+Disallow: /checkout
+Disallow: /orders
+
+# Allow public content
+Allow: /explore
+Allow: /creators
+Allow: /categories
+Allow: /categories/*
+Allow: /reels
+Allow: /live
+Allow: /products/
+Allow: /creator/
+Allow: /auth
+Allow: /about
+Allow: /contact
+Allow: /faq
+Allow: /help
+
+# Crawl-delay for respectful crawling
+Crawl-delay: 1
+
+# Block bad bots
+User-agent: AhrefsBot
+User-agent: SemrushBot
+Crawl-delay: 10
+
+# Sitemap location
+Sitemap: https://kein.in/sitemap.xml
+
+# Security policy
+# Security: https://kein.in/.well-known/security.txt
