@@ -1,0 +1,59 @@
+# Ultra-clean Dockerfile for troubleshooting
+# Use this if the main Dockerfile still has issues
+
+FROM node:18-alpine AS base
+WORKDIR /app
+
+# Install dependencies
+FROM base AS deps
+RUN apk add --no-cache libc6-compat
+
+# Copy ONLY package files first
+COPY package.json ./
+
+# Force clean install - no cache, no lockfile
+RUN rm -rf node_modules package-lock.json || true
+RUN npm cache clean --force
+RUN npm install --legacy-peer-deps
+
+# Build stage
+FROM base AS builder
+
+# Copy node_modules from deps
+COPY --from=deps /app/node_modules ./node_modules
+
+# Copy source code
+COPY . .
+
+# Clean previous builds
+RUN rm -rf .next || true
+
+# Set production environment
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Build
+RUN npm run build
+
+# Production stage
+FROM base AS runner
+
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Copy built app
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE 3000
+
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+CMD ["node", "server.js"]
